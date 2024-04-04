@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <style>
+        .multicolored-heading {
+            background: linear-gradient(45deg, #00c6fb, #005bea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            padding: 20px;
+        }
+        body {
+            background-color: #0C134F;
+            font-family: 'Nunito', sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            margin-top: 0px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 30px;
+        }
+
+        .card-header {
+            background-color: #4e73df;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 0;
+        }
+
+        .form-control-user {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            background-color: transparent;
+            box-shadow: none;
+            text-align: center;
+        }
+
+        .form-control-user:focus {
+            outline: none;
+            border-color: #4e73df;
+        }
+
+        .btn-user {
+            background-color: #4e73df;
+            color: #fff;
+            border-radius: 10px;
+            padding: 12px 0;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn-user:hover {
+            background-color: #375aa6;
+        }
+
+        .divider {
+            border-top: 1px solid #ccc;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .small {
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+
+<body ng-app="registrationApp" ng-controller="registrationCtrl" style="margin: 0; height: 100%; overflow: hidden">
+    <h1 class="multicolored-heading">Quizzo!</h1>
+    <div class="container justify-content-center align-items-center">
+        <div class="card" style="width:100%;">
+            <div class="card-header">
+                <h4 style="margin-bottom: 0px;">Create an Account</h4>
+            </div>
+            <div class="card-body">
+                <form class="user" name="registrationForm" method="post" action="register.php" ng-submit="register()" novalidate>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" minlength="8" maxlength="20" ng-change="register()" type="text" id="username" placeholder="Username" name="username" ng-model="registrationData.username" ng-model-options="{ allowInvalid: true }" ng-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input class="form-control form-control-user" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/" minlength="8" ng-change="register()" type="password" id="password" placeholder="Password" name="password" ng-model="registrationData.password" ng-model-options="{ allowInvalid: true }" ng-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input class="form-control form-control-user" minlength="8" ng-change="register()" type="password" id="repeatPassword" placeholder="Repeat Password" name="password_repeat" ng-model="registrationData.passwordRepeat" ng-required="true" ng-pattern="registrationData.password">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" ng-change="register()" type="text" id="firstName" placeholder="First Name" name="firstName" ng-model="registrationData.firstName" ng-required="true" ng-pattern="/^[a-zA-Z ]*$/" ng-trim="false">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" ng-change="register()" type="text" id="lastName" placeholder="Last Name" name="lastName" ng-model="registrationData.lastName" ng-required="true" ng-pattern="/^[a-zA-Z ]*$/" ng-trim="false">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control-user" ng-change="register()" type="email" id="email" aria-describedby="emailHelp" placeholder="Email Address" name="email" ng-model="registrationData.email" ng-required="true">
+                    </div>
+                    <!-- Error message text -->
+                    <p id="errorMessage" class="text-danger text-center" ng-if="registrationForm.$dirty && registrationForm.$invalid && (registrationForm.username.$error.minlength || registrationForm.password.$error.minlength)">
+                        {{errorMessage}}
+                    </p>
+                    <button class="btn btn-primary btn-user" type="submit" ng-disabled="registrationForm.$invalid">Register Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+var app = angular.module('registrationApp', []);
+app.controller('registrationCtrl', function ($scope) {
+    $scope.errorMessage = '';
+    $scope.register = function () {
+        if ($scope.registrationForm.$valid) {
+            console.log('Registration data:', $scope.registrationData);
+            // Add further logic for registration here
+        } else {
+            // Clear previous error message
+            $scope.errorMessage = '';
+            // Check individual form fields for errors and assign the first encountered error message to errorMessage
+            if ($scope.registrationForm.$dirty) {
+                if ($scope.registrationForm.username.$error.required) {
+                    $scope.errorMessage = 'Username is required.';
+                } else if ($scope.registrationForm.username.$error.minlength) {
+                    $scope.errorMessage = 'Username must be at least 8 characters long.';
+                } else if ($scope.registrationForm.username.$error.maxlength) {
+                    $scope.errorMessage = 'Username must be less than 20 characters long.';
+                } else if ($scope.registrationForm.password.$error.required) {
+                    $scope.errorMessage = 'Password is required.';
+                } else if ($scope.registrationForm.password.$error.minlength) {
+                    $scope.errorMessage = 'Password must be at least 8 characters long.';
+                }else if ($scope.registrationForm.password.$error.pattern) {
+                    $scope.errorMessage = 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character.';
+                } else if ($scope.registrationForm.password_repeat.$error.required) {
+                    $scope.errorMessage = 'Repeat password is required.';
+                } else if ($scope.registrationForm.password_repeat.$error.pattern) {
+                    $scope.errorMessage = 'Passwords do not match.';
+                } else if ($scope.registrationForm.firstName.$error.required) {
+                    $scope.errorMessage = 'First name is required.';
+                } else if ($scope.registrationForm.firstName.$error.pattern) {
+                    $scope.errorMessage = 'Invalid first name.';
+                } else if ($scope.registrationForm.lastName.$error.required) {
+                    $scope.errorMessage = 'Last name is required.';
+                } else if ($scope.registrationForm.lastName.$error.pattern) {
+                    $scope.errorMessage = 'Invalid last name.';
+                } else if ($scope.registrationForm.email.$error.required) {
+                    $scope.errorMessage = 'Email address is required.';
+                } else if ($scope.registrationForm.email.$error.email) {
+                    $scope.errorMessage = 'Invalid email address.';
+                } else {
+                    $scope.errorMessage = 'Please fill out all required fields correctly.';
+                }
+            }
+        }
+    };
+});
+
+    </script>
+    
+</body>
+
+</html>
