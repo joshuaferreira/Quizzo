@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 12:29 PM
+-- Generation Time: Apr 04, 2024 at 04:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -41,6 +41,30 @@ CREATE TABLE `contact` (
 
 INSERT INTO `contact` (`id`, `name`, `email`, `message`, `created_at`) VALUES
 (1, 'test', 'tester@mail.com', 'hello world', '2024-04-04 04:42:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scores`
+--
+
+CREATE TABLE `scores` (
+  `username` varchar(255) NOT NULL,
+  `gk` int(11) NOT NULL,
+  `books` int(11) NOT NULL,
+  `film` int(11) NOT NULL,
+  `comp` int(11) NOT NULL,
+  `sports` int(11) NOT NULL,
+  `geo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `scores`
+--
+
+INSERT INTO `scores` (`username`, `gk`, `books`, `film`, `comp`, `sports`, `geo`) VALUES
+('joshtheboss', 120, 70, 60, 50, 100, 90),
+('test', 100, 100, 127, 100, 100, 100);
 
 -- --------------------------------------------------------
 
@@ -85,6 +109,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `password`, `firstName`, `lastName`, `email`) VALUES
+('joshtheboss', 'Pass@123', 'Joshua', 'Ferreira', 'joshua@gmail.com'),
 ('test', '1', 'tester', 'testing', 'test@mail.com');
 
 --
@@ -96,6 +121,12 @@ INSERT INTO `users` (`username`, `password`, `firstName`, `lastName`, `email`) V
 --
 ALTER TABLE `contact`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `scores`
+--
+ALTER TABLE `scores`
+  ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `topics`
