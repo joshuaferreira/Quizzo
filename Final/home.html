@@ -7,33 +7,23 @@
     <title>Home</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.css">
-    <style>
-        /* CSS for the typing animation */
-        @keyframes typing {
-            from {
-                width: 0;
+    <script>
+        function checkLogin() {
+            if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
+                document.getElementById("login_button").innerText = "Logout";
+                document.getElementById("login_button").setAttribute('onclick',"logout()");
             }
         }
 
-        #dynamicWord {
-    display: inline-block;
-    border-right: 2px solid black;
-}
-
-
-        @keyframes blink-caret {
-            from, to {
-                border-color: transparent;
-            }
-            50% {
-                border-color: black;
-            }
+        function logout() {
+            localStorage.removeItem('username');
+            sessionStorage.removeItem('username');
+            window.location.href = "login.html";
         }
-
-    </style>
+    </script>
 </head>
 
-<body>
+<body onload="checkLogin()">
     <!--Navbar-->
     <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -41,16 +31,26 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
-                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-right-color: 255;border-bottom-color: 255;border-left-color: 255;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
             </div>
         </div>
     </nav>
     <div class="container">
         <div class="row">
             <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <p style="width: 200px;">Show your <span id="dynamicWord">greatness</span></p>
-                <button class="btn btn-primary mt-3" type="button">Take a Quiz!</button>
-
+                <table>
+                    <tr>
+                        <td>
+                            <p>Why do you want to take a Quiz? to get&nbsp;</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="btn btn-primary" type="button" onclick="window.open('QuizTopics.html', '_self')">Take a Quiz!</button> 
+                        </td>
+                    </tr>
+                </table>
+                
             </div>
             
             <div class="col-md-6">
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
                     <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
-                    <p>C128<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+                    <p>C127<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
                 </div>
                 <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
                     <div class="fw-bold d-flex align-items-center mb-2"><span><span style="font-weight: normal !important;">Quizzo!</span></span></div>
@@ -113,41 +113,6 @@
         </div>
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    
-    <script>
-      
-      // JavaScript to change the dynamic word
-const dynamicWords = ['greatness', 'excellence', 'smartness'];
-let currentIndex = 0;
-const dynamicWordElement = document.getElementById('dynamicWord');
-
-function typeNextWord() {
-    dynamicWordElement.textContent = '';
-    const word = dynamicWords[currentIndex];
-    currentIndex = (currentIndex + 1) % dynamicWords.length;
-    typeWord(word, 0);
-}
-
-function typeWord(word, index) {
-    if (index <= word.length) {
-        dynamicWordElement.textContent = word.substring(0, index);
-        dynamicWordElement.classList.add('typing'); // Add class to trigger animation
-        setTimeout(() => {
-            dynamicWordElement.classList.remove('typing'); // Remove class after animation
-            typeWord(word, index + 1);
-        }, 150); // Adjust typing speed here
-    } else {
-        setTimeout(typeNextWord, 1000); // Wait before typing next word
-    }
-}
-
-// Start typing the first word
-typeNextWord();
-
-
-    </script>
 </body>
 
 </html>
-
-

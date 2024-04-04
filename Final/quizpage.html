@@ -17,12 +17,17 @@
         function loadQuizData() {
             checkLogin();
             getTopicInfo();
+            getLeaderBoard();
         }
 
         function checkLogin() {
             if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
                 document.getElementById("login_button").innerText = "Logout";
                 document.getElementById("login_button").setAttribute('onclick',"logout()");
+            }
+            else{
+                alert("Login!");
+                window.location.href="login.html";
             }
         }
 
@@ -36,18 +41,69 @@
             // Fetch quiz ID from sessionStorage
             quizID = (sessionStorage.getItem("quizID"));
             url = `topics.php?quizID=${quizID}`;
-            console.log(url);
             
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); 
                     document.getElementById("quiz-title").textContent = data.quiz_title;
                     document.getElementById("quiz-about-title").textContent = "About " + data.quiz_title;
                     document.getElementById("quiz-about-description").textContent = data.quiz_description;
                     document.getElementById("quiz-title-leaderboard").textContent = data.quiz_title;
                 })
                 .catch(error => console.error('Error fetching JSON:', error));
+        }
+
+        function getLeaderBoard(){
+            const categoryIds = {
+            '9': 'gk',       // General Knowledge
+            '10': 'books',   // Entertainment: Books
+            '11': 'film',    // Entertainment: Film
+            '18': 'comp',    // Science: Computers
+            '22': 'geo',     // Geography
+            '21': 'sports'   // Sports
+            };
+
+            // Retrieve the category ID from session storage
+            var quizID = sessionStorage.getItem('quizID');
+            var quizCAT = categoryIds[quizID];
+            if(sessionStorage.getItem("username") !== null){
+                username = sessionStorage.getItem("username");
+            }else{
+                username = localStorage.getItem("username");
+            }
+            
+            url = `leaderboard.php?quizCAT=${quizCAT}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    generateLeaderBoard(data);
+                })
+                .catch(error => console.error('Error fetching JSON:', error));
+        }
+
+        function generateLeaderBoard(data) {
+            let tbl = document.getElementById('dataTable');
+            for(i = 0 ; i < data.length ; i++){
+                let tr = document.createElement("tr");
+
+                let pos = document.createElement("td");
+                pos.innerHTML = `<b>${i+1}</b>`;
+                
+                let name = document.createElement("td");
+                name.innerHTML = `<b>${data[i].username}</b>`;
+                
+                let score = document.createElement("td");
+                score.innerHTML = `<b>${data[i].score}</b>`;
+
+                tr.appendChild(pos);
+                tr.appendChild(name);
+                tr.appendChild(score);
+
+                console.log(tr);
+                
+                tbl.appendChild(tr);
+            }
         }
     </script>
     <style>
@@ -134,7 +190,7 @@
                                 
                             </div>
                             <div class="col-md-4 col-lg-3 col-xl-2 align-self-center">
-                                <button class="quiz-start-btn">Start Quiz</button>
+                                <button class="quiz-start-btn" onclick="window.open('testing-api.html','_self')">Start Quiz</button>
                             </div>
                         </div>
                     </div>
@@ -145,13 +201,13 @@
                     <h3 class="text-dark mb-3" id="quiz-title-leaderboard">Topic Name</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
-                            <p class="text-primary m-0 fw-bold">Top 10</p>
+                            <p class="text-primary m-0 fw-bold" id="top">Top 10</p>
                         </div>
                         <div class="card-body">
                             <!-- Leaderboard Table -->
                             
                             <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
-                                <table class="table my-0" id="dataTable">
+                                <table class="table my-0">
                                     <thead>
                                         <tr>
                                             <th scope="col" class="col-2">Position</th>
@@ -159,7 +215,7 @@
                                             <th scope="col" class="col-2">Score</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody  id="dataTable">
 
                                     </tbody>
                                     

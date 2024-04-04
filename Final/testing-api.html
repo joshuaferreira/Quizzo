@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus!</title>
+    <style>
+        .multicolored-heading {
+            background: linear-gradient(45deg, #00c6fb, #005bea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            padding: 20px;
+        }
+        body {
+            background-color: #0C134F;
+            font-family: 'Nunito', sans-serif;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            margin-top: 0px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: black;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .option {
+            margin-bottom: 20px;
+            flex-basis: calc(50% - 10px); /* Two options per row with 10px margin in between */
+        }
+        .option input[type="radio"] {
+            margin-right: 5px;
+        }
+        .btn-user {
+            background-color: #4e73df;
+            color: #fff;
+            border-radius: 10px;
+            padding: 12px 0;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+            border: none; /* Remove border */
+            outline: none; /* Remove outline */
+        }
+        .btn-user:hover {
+            background-color: #375aa6;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes staggeredFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .staggered-animation {
+            animation: staggeredFadeIn 0.5s ease forwards;
+        }
+
+        /* Modal CSS */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+            color: black;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Set width of modal */
+            max-width: 400px; /* Adjust width of modal */
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+        }
+
+        .modal-image {
+            max-width: 150px;
+            max-height: 150px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .modal-text {
+            text-align: center;
+            color: black;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="questions()">
+    <h1 class="multicolored-heading">Quizzo!</h1>
+    <div class="container" id="test">
+        <!-- Questions will be generated here -->
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Result</h2>
+            <div id="scoreContent">
+                <img id="scoreImage" src="" alt="Score Image" style="width: 150px; height: 150px;">
+                <p id="scoreText"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Your JavaScript code here
+
+        // Store correct answers for questions
+        let qs = [];
+        let correct_as = [];
+
+        function decodeHTMLEntities(text) {
+            var textArea = document.createElement('textarea');
+            textArea.innerHTML = text;
+            return textArea.value;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Generate token before execution
+        function questions() {
+            // Retrieve the category ID from session storage
+            var quizID = sessionStorage.getItem('quizID');
+            const url = `https://opentdb.com/api.php?amount=10&category=${quizID}&type=multiple`; // Film link
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    generateQuestions(data.results);
+                });
+        }
+
+        function generateQuestions(data){
+            const form = document.getElementById('test');
+            const button = document.createElement('button');
+            button.textContent = 'Submit';
+            button.classList.add('btn-user');
+            button.type = 'submit'; 
+            button.addEventListener('click', check);
+
+            data.forEach((element, index) => {
+                setTimeout(() => { // Adding delay for animation effect
+                    const div = document.createElement('div');
+                    div.classList.add('card', 'my-3', 'staggered-animation');
+
+                    // Create question
+                    const question = document.createElement('p');
+                    question.classList.add('question');
+                    question.innerHTML = `Question ${index + 1}: ${element.question}`;
+                    div.appendChild(question);
+
+                    // JS object array
+                    let arrQs = [];
+
+                    correct_as.push(decodeHTMLEntities(element.correct_answer));
+                    qs.push(decodeHTMLEntities(element.question));
+
+                    // Creating radio buttons
+                    const options = shuffleArray([element.correct_answer, ...element.incorrect_answers]);
+                    options.forEach((option, i) => {
+                        const radio = document.createElement('input');
+                        radio.setAttribute("type", "radio");
+                        radio.setAttribute("value", (option === element.correct_answer) ? "1" : "0");
+                        radio.setAttribute("name", `question_${index}`);
+                        radio.setAttribute("id", `option_${index}_${i}`);
+
+                        const label = document.createElement('label');
+                        label.innerHTML = option;
+                        label.setAttribute("for", `option_${index}_${i}`);
+
+                        const obj = { radio: radio, text: label };
+                        arrQs.push(obj);
+                    });
+
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.classList.add('options');
+                    arrQs.forEach(option => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.classList.add('option');
+                        optionDiv.appendChild(option.radio);
+                        optionDiv.appendChild(option.text);
+                        optionsDiv.appendChild(optionDiv);
+                    });
+
+                    div.appendChild(optionsDiv);
+
+                    // Add question card to form
+                    form.appendChild(div);
+
+                    // Add submit button after last question
+                    if (index === data.length - 1) {
+                        form.appendChild(button);
+                    }
+                }, index * 200); // Adjust delay time as needed
+            });
+        }
+
+        function emptyCheck() {
+            for (let i = 0; i < qs.length; i++) {
+                const radios = document.getElementsByName(`question_${i}`);
+                let checked = false;
+                for (let j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        checked = true;
+                        break;
+                    }
+                }
+                if (!checked) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function check() {
+            if (emptyCheck()) {
+                let score = 0;
+                correct_as.forEach((answer, index) => {
+                    const radio = document.querySelector(`input[name="question_${index}"]:checked`);
+                    if (radio && radio.value === "1") {
+                        score++;
+                    }
+                });
+
+                // Determine the image based on the score
+                let imageUrl = "";
+                if (score <= 3) {
+                    imageUrl = "assets/bad.png";
+                } else if (score <= 7) {
+                    imageUrl = "assets/mid.png";
+                } else {
+                    imageUrl = "assets/good.png";
+                }
+
+                // Display modal with score image
+                showModal(score, imageUrl);
+                
+                const categoryIds = {
+                '9': 'gk',       // General Knowledge
+                '10': 'books',   // Entertainment: Books
+                '11': 'film',    // Entertainment: Film
+                '18': 'comp',    // Science: Computers
+                '22': 'geo',     // Geography
+                '21': 'sports'   // Sports
+                };
+
+                // Retrieve the category ID from session storage
+                var quizID = sessionStorage.getItem('quizID');
+                var quizCAT = categoryIds[quizID];
+                var username;
+                if(sessionStorage.getItem('username') !== null){
+                    username = sessionStorage.getItem('username');
+                }
+                else{
+                    username = localStorage.getItem('username');
+                }
+                let score_db = score;
+
+                let url = `update.php?quizCAT=${quizCAT}&username=${username}&score=${score}`;
+                fetch(url);
+                alert('Score Updated');
+                window.location.href = 'quizpage.html';
+                return true;
+            } else {
+                showIncompleteModal();
+                return false;
+            }
+        }
+
+        function showModal(score, imageUrl) {
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the image and set the source
+            var img = document.getElementById("scoreImage");
+            img.src = imageUrl;
+
+            // Set the score text
+            var scoreText = document.getElementById("scoreText");
+            scoreText.textContent = "Your score: " + score;
+
+            // Display the modal
+            modal.style.display = "block";
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        } 
+
+        function resetCheckboxes() {
+            for (let i = 0; i < qs.length; i++) {
+                const radios = document.getElementsByName(`question_${i}`);
+                for (let j = 0; j < radios.length; j++) {
+                    radios[j].checked = false;
+                }
+            }
+        }
+
+        function showIncompleteModal() {
+            // Get the modal
+            var modal = document.getElementById("incompleteModal");
+
+            // Display the modal
+            modal.style.display = "block";
+
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[1];
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        } 
+    </script>
+
+    <!-- The Incomplete Modal -->
+    <div id="incompleteModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Oops, you forgot some questions</h2>
+            <p>Please answer all questions before submitting.</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
+ 

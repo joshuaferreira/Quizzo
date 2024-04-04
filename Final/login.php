@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare SQL statement (to prevent SQL injection)
-    $query = "SELECT * FROM temp WHERE username=? AND password=?";
+    $query = "SELECT * FROM users WHERE username=? AND password=?";
     $stmt = $conn->prepare($query);
 
     // Check if preparation was successful
