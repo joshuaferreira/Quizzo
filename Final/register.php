@@ -35,10 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     } else {
         // SQL insert statement
-        $sql = "INSERT INTO users (username, password, firstName, lastName, email) VALUES ('$username', '$password', '$firstName', '$lastName', '$email')";
+        $sql = "INSERT INTO users VALUES ('$username', '$password', '$firstName', '$lastName', '$email')";
+        $sql2 = "INSERT INTO scores (username, gk, books, film, comp, sports, geo) VALUES ('$username', 0, 0, 0, 0, 0, 0)";
 
         // Execute the SQL statement
-        if ($conn->query($sql) === TRUE) {
+        if ( ($conn->query($sql) and $conn->query($sql2) ) === TRUE ) {
             // Success alert message
             $alertMessage = "Record inserted successfully";
             echo '<script>alert("' . $alertMessage . '");</script>';
