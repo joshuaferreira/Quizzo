@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>AboutUs</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.css">
+    <script>
+        function checkLogin() {
+            if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
+                document.getElementById("login_button").innerText = "Logout";
+                document.getElementById("login_button").setAttribute('onclick',"logout()");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            sessionStorage.removeItem('username');
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="padding: 20px 40px;margin-top: 10px;margin-bottom: 10px;">
+        <h1><strong>About Us!</strong></h1>
+        <p><strong>Welcome to Quizzo</strong> - your premier destination for online trivia entertainment!<br>Quizzo was founded with a simple yet ambitious goal: to create a platform where people from all walks of life can come together to challenge their minds, learn new things, and have a blast while doing it. Our team is passionate about trivia and dedicated to providing an engaging and enjoyable experience for players of all skill levels.<br>At Quizzo, we believe in the power of knowledge to bring people together and spark meaningful connections. Whether you're a trivia novice or a seasoned pro, there's a place for you here. Our diverse range of quiz topics ensures that there's always something new and exciting to discover, from history and science to music and movies.<br>But Quizzo is more than just a trivia game - it's a community. We love seeing players compete, collaborate, and share their love of trivia with one another. Our platform provides a space where players can connect, compete, and celebrate each other's achievements.<br>We're constantly striving to improve and innovate, bringing you new features, challenges, and experiences to keep the fun going. So come join us at Quizzo and let the adventure begin!</p>
+        <h1><span style="color: var(--tw-prose-bold);">Our Mission</span></h1>
+        <p><span style="color: rgb(13, 13, 13);">At Quizzo, our mission is to inspire curiosity, foster learning, and cultivate community through the power of trivia. We're dedicated to providing a fun and engaging platform where people of all backgrounds can come together to test their knowledge, challenge themselves, and connect with others who share their passion for learning and friendly competition.</span></p>
+        <h1>What We Offer</h1>
+        <p>Quizzo offers a dynamic and diverse range of trivia experiences designed to entertain, educate, and challenge players of all skill levels. From our extensive library of quiz topics spanning across various categories such as history, science, entertainment, sports, and more, to our interactive features like leaderboards, we strive to provide an immersive and enjoyable trivia experience for everyone.</p>
+        <h1><span style="color: var(--tw-prose-bold);">Why Choose Us?</span></h1>
+        <p><span style="color: var(--tw-prose-body);">Choosing Quizzo means choosing quality, diversity, and community. With our carefully curated trivia content, engaging gameplay features, and vibrant community of players, Quizzo stands out as the premier destination for trivia enthusiasts looking for a fun and rewarding experience. Whether you're looking to test your knowledge, connect with like-minded individuals, or simply have a good time, Quizzo has everything you need to make your trivia journey unforgettable.</span></p>
+    </div>
+    <footer class="text-white" style="background:#1D267D;">
+        <div class="container py-4 py-lg-5" style="background:#1D267D;">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="link-light" href="about.html">About</a></li>
+                        <li><a class="link-light" href="contact.html">Contact Us</a></li>
+                        <li><a class="link-light" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="link-light" href="terms.html">Terms And Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Joshua Ferreira</h3>
+                    <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Aadee Sawarkar</h3>
+                    <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
+                    <p>C127<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+                </div>
+                <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                    <div class="fw-bold d-flex align-items-center mb-2"><span><span style="font-weight: normal !important;">Quizzo!</span></span></div>
+                    <p><strong>Unlock Your Wit, Quizzo - Where Knowledge Meets Fun!</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Terms</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.css">
+    <script>
+        function checkLogin() {
+            if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
+                document.getElementById("login_button").innerText = "Logout";
+                document.getElementById("login_button").setAttribute('onclick',"logout()");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            sessionStorage.removeItem('username');
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div style="padding: 10px;margin-top: 10px;margin-bottom: 10px;"><div class="container">
+    <h1>
+        <abbr title="Terms and Conditions">T and C</abbr>
+    </h1>
+
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#uc">User Conduct</a></li>
+        <li><a href="#ip">Intellectual Property</a></li>
+        <li><a href="#disc">Disclaimer</a></li>
+        <li><a href="#gl">Governing Law</a></li>
+        <li><a href="#ct">Changes to Terms</a></li>
+    </ul>
+
+    <p>By accessing or using the Quiz Website, you agree to comply with and be bound by these terms and conditions.</p>
+
+    <h2 id="uc">User Conduct</h2>
+    <p>
+        By accessing and using our quiz website, you agree to abide by ethical and lawful standards of conduct. You are expressly prohibited from engaging in any activities that may compromise the integrity of the website, including but not limited to:
+
+        <ol>
+
+            <li>Cheating: Users must not use any unauthorized tools, devices, or methods to gain an unfair advantage in quizzes or manipulate results.</li>
+
+            <li>Misuse of Content: Users are not allowed to reproduce, distribute, or exploit any content from the website without prior written consent from the website owner.</li>
+
+            <li>Hacking or Unauthorized Access: Users must not attempt to gain unauthorized access to the website, its servers, or any other systems associated with the website.</li>
+
+            <li>Harassment or Abuse: Users are expected to interact with other users and the website's staff respectfully. Harassment, abuse, or any form of disruptive behavior will not be tolerated.</li>
+
+            <li>Violation of Laws: Users must comply with all applicable local, national, and international laws and regulations while using the website.</li>
+
+        </ol>
+
+        Violations of these user conduct guidelines may result in the suspension or termination of user accounts and legal action if deemed necessary. We reserve the right to investigate and take appropriate action against any user violating these terms.
+    </p>
+
+    <h2 id="ip">Intellectual Property</h2>
+    <p>
+        The content, design, logos, trademarks, and other intellectual property displayed on this quiz website are the exclusive property of Quizzo! unless otherwise stated. Users are granted a limited, non-exclusive, and non-transferable license to access and use the website solely for personal and non-commercial purposes.
+
+        <br>
+        <br>
+
+        <strong>Users are expressly prohibited from:</strong>
+
+        <ol>
+            <li>Reproduction: Copying, reproducing, or duplicating any content or design elements of the website without prior written consent from Quizzo!.</li>
+
+            <li>Distribution: Distributing, selling, or otherwise making the website's content available to third parties without explicit authorization.</li>
+
+            <li>Modification: Modifying, adapting, or creating derivative works based on the website's content or design.</li>
+
+            <li>Infringement: Engaging in any activity that infringes upon or violates the intellectual property rights of Quizzo! or any third party.</li>
+
+        </ol>
+
+        Any unauthorized use of the website's intellectual property may result in legal action, including but not limited to civil lawsuits seeking damages and injunctive relief. Quizzo! reserves all rights not expressly granted in these terms.
+    </p>
+
+    <h2 id="#disc">Disclaimer</h2>
+    <p>
+        The content and information provided on this quiz website are for general informational purposes only. Quizzo! makes no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website for any purpose.
+
+        Any reliance you place on such information is strictly at your own risk. In no event will Quizzo! be liable for any loss or damage, including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of or in connection with the use of this website.
+
+        Through this website, you can link to other websites that are not under the control of Quizzo!. We have no control over the nature, content, and availability of those sites. The inclusion of any links does
+    </p>
+
+    <h2 id="gl">Governing Law</h2>
+    <p>
+        These terms and conditions are governed by and construed in accordance with the laws of India. Any dispute or claim arising out of or in connection with these terms will be subject to the exclusive jurisdiction of the courts in India.
+
+    </p>
+
+    <h2 id="ct">Changes to Terms</h2>
+    <p>
+        Quizzo! reserves the right to update, modify, or change these terms and conditions at any time. Any amendments or updates to the terms will be effective immediately upon posting on this website. It is the responsibility of users to review these terms periodically for changes.
+
+        By continuing to access or use the quiz website after modifications have been made, you agree to be bound by the revised terms. If you do not agree to the new terms, please refrain from using the website.
+
+        Quizzo! may, but is not obligated to, notify users of significant changes to the terms via email or through a notice on the website. It is recommended that users regularly check the terms and conditions for any updates.
+    </p>
+</div></div>
+<footer class="text-white" style="background:#1D267D;">
+    <div class="container py-4 py-lg-5" style="background:#1D267D;">
+        <div class="row justify-content-center">
+            <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                <h3 class="fs-6 text-white">Links</h3>
+                <ul class="list-unstyled">
+                    <li><a class="link-light" href="about.html">About</a></li>
+                    <li><a class="link-light" href="contact.html">Contact Us</a></li>
+                    <li><a class="link-light" href="privacy.html">Privacy Policy</a></li>
+                    <li><a class="link-light" href="terms.html">Terms And Conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                <h3 class="fs-6 text-white">Joshua Ferreira</h3>
+                <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">Link</a>
+            </div>
+            <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                <h3 class="fs-6 text-white">Aadee Sawarkar</h3>
+                <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">Link</a>
+            </div>
+            <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
+                <p>C127<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+            </div>
+            <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                <div class="fw-bold d-flex align-items-center mb-2"><span><span style="font-weight: normal !important;">Quizzo!</span></span></div>
+                <p><strong>Unlock Your Wit, Quizzo - Where Knowledge Meets Fun!</strong></p>
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

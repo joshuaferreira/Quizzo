@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ContactUs</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function checkLogin() {
+            if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
+                document.getElementById("login_button").innerText = "Logout";
+                document.getElementById("login_button").setAttribute('onclick',"logout()");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            sessionStorage.removeItem('username');
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+
+<body onload="checkLogin()">
+    <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+            </div>
+        </div>
+    </nav>
+    <section class="position-relative py-4 py-xl-5">
+        <div class="container position-relative"  ng-app="">
+            <div class="row">
+                <div class="col-xl-6 align-items-start">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3769.9767016152523!2d72.838749!3d19.108678!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9b888ae67fd%3A0xe0b9538d623ac5d2!2sMukesh%20Patel%20School%20of%20Technology%20Management%20%26%20Engineering!5e0!3m2!1sen!2sin!4v1712058137460!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+                
+                <div class="col-xl-6 align-items-start">
+                    <form class="p-3 p-xl-4" method="post" action="contact.php" name="contactForm" ng-submit="return submitForm()">
+                        <h4>Contact us</h4>
+                        <p class="text-muted"><span style="color: rgb(13, 13, 13);">We'd love to hear from you! Whether you have a question, suggestion, or just want to say hello, our team is here to help. Feel free to reach out to us using the contact information provided below:</span></p>
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control" type="text" id="name" name="name" ng-model="name" required>
+                            <br>
+                            <p class="text-danger" ng-show="contactForm.name.$touched && contactForm.name.$pristine">Name is required</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="email" id="email" name="email" ng-model="email" required>
+                            <br>
+                            <p class="text-danger" ng-show="contactForm.email.$touched && contactForm.email.$pristine">Email is required</p>
+                            <br>
+                            <p class="text-danger" ng-show="contactForm.email.$touched && contactForm.email.$dirty && contactForm.email.$error.email">Invalid email address</p>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" ng-model="message" required></textarea>
+                            <br>
+                            <p class="text-danger" ng-show="contactForm.message.$touched && contactForm.message.$pristine">Message is required</p>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary" type="submit" ng-disabled="contactForm.$invalid">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="margin: 0px;margin-top: 10px;">
+                    <h2><strong>Alternatively</strong></h2>
+                    <p>You can mail us at&nbsp;<span><a href="mailto:quizzo@mail.com">quizzo@mail.com</a></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="text-white" style="background:#1D267D;">
+        <div class="container py-4 py-lg-5" style="background:#1D267D;">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="link-light" href="about.html">About</a></li>
+                        <li><a class="link-light" href="contact.html">Contact Us</a></li>
+                        <li><a class="link-light" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="link-light" href="terms.html">Terms And Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Joshua Ferreira</h3>
+                    <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Aadee Sawarkar</h3>
+                    <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
+                    <p>C127<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+                </div>
+                <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                    <div class="fw-bold d-flex align-items-center mb-2"><span><span style="font-weight: normal !important;">Quizzo!</span></span></div>
+                    <p><strong>Unlock Your Wit, Quizzo - Where Knowledge Meets Fun!</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

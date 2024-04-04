@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>General Knowledge</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Basic-icons.css">
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script>
+        let quizID ;
+
+        function loadQuizData() {
+            checkLogin();
+            getTopicInfo();
+        }
+
+        function checkLogin() {
+            if (sessionStorage.getItem("username") !== null || localStorage.getItem("username") !== null ) {
+                document.getElementById("login_button").innerText = "Logout";
+                document.getElementById("login_button").setAttribute('onclick',"logout()");
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('username');
+            sessionStorage.removeItem('username');
+            window.location.href = "login.html";
+        }
+
+        function getTopicInfo() {
+            // Fetch quiz ID from sessionStorage
+            quizID = (sessionStorage.getItem("quizID"));
+            url = `topics.php?quizID=${quizID}`;
+            console.log(url);
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); 
+                    document.getElementById("quiz-title").textContent = data.quiz_title;
+                    document.getElementById("quiz-about-title").textContent = "About " + data.quiz_title;
+                    document.getElementById("quiz-about-description").textContent = data.quiz_description;
+                    document.getElementById("quiz-title-leaderboard").textContent = data.quiz_title;
+                })
+                .catch(error => console.error('Error fetching JSON:', error));
+        }
+    </script>
+    <style>
+        .quiz-topic-container {
+            background-color: #0069d9;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        
+        .quiz-description-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-description-container h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .quiz-description-container p {
+            margin-bottom: 0;
+            color: #666;
+        }
+        
+        .quiz-topic-container h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .quiz-start-btn {
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .quiz-start-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body id="page-top" onload="loadQuizData()">
+    <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul><button class="btn btn-primary" type="button" style="background: var(--bs-navbar-disabled-color);border-color: rgb(255, 255, 255);border-top-color: rgb(255,;border-right-color: 255,;border-bottom-color: 255);border-left-color: 255,;" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                
+                <section class="py-4 py-xl-5">
+                    <div class="container-fluid">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-6">
+
+                                <div class="quiz-topic-container">
+                                    <h2 id="quiz-title">Quiz Title</h2>
+                                </div>
+                                <div class="quiz-description-container">
+                                    <h2 id="quiz-about-title">About Quiz</h2>
+                                    <hr>
+                                    <p  id="quiz-about-description">Description</p>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-4 col-lg-3 col-xl-2 align-self-center">
+                                <button class="quiz-start-btn">Start Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Leaderboard Section -->
+                <div class="container mb-5">
+                    <h3 class="text-dark mb-3" id="quiz-title-leaderboard">Topic Name</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Top 10</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- Leaderboard Table -->
+                            
+                            <div class="table-responsive table mt-2" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="col-2">Position</th>
+                                            <th scope="col" class="col-8">Name</th>
+                                            <th scope="col" class="col-2">Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    <footer class="text-white" style="background:#1D267D;">
+        <div class="container py-4 py-lg-5" style="background:#1D267D;">
+            <div class="row justify-content-center">
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a class="link-light" href="about.html">About</a></li>
+                        <li><a class="link-light" href="contact.html">Contact Us</a></li>
+                        <li><a class="link-light" href="privacy.html">Privacy Policy</a></li>
+                        <li><a class="link-light" href="terms.html">Terms And Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Joshua Ferreira</h3>
+                    <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Aadee Sawarkar</h3>
+                    <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">Link</a>
+                </div>
+                <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
+                    <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
+                    <p>C127<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+                </div>
+                <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
+                    <div class="fw-bold d-flex align-items-center mb-2"><span><span style="font-weight: normal !important;">Quizzo!</span></span></div>
+                    <p><strong>Unlock Your Wit, Quizzo - Where Knowledge Meets Fun!</strong></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

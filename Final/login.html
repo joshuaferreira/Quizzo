@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Brand</title>
+    <link rel="stylesheet" href="Finished/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
+    <link rel="stylesheet" href="Finished/assets/css/Login-Form-Basic-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+        .multicolored-heading {
+            background: linear-gradient(45deg, #00c6fb, #005bea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        body {
+            background-color: #0C134F;
+            font-family: 'Nunito', sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            margin-top: 0px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 30px;
+        }
+        .card-header {
+            background-color: #4e73df;
+            border-radius: 10px 10px 0 0;
+            padding: 20px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .card-body {
+            padding: 0;
+        }
+        .form-control-user {
+            border: none;
+            border-bottom: 1px solid #ccc;
+            border-radius: 0;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            background-color: transparent;
+            box-shadow: none;
+        }
+        .form-control-user:focus {
+            outline: none;
+            border-color: #4e73df;
+        }
+        .btn-user {
+            background-color: #4e73df;
+            color: #fff;
+            border-radius: 10px;
+            padding: 12px 0;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+        }
+        .btn-user:hover {
+            background-color: #375aa6;
+        }
+        .divider {
+            border-top: 1px solid #ccc;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .small {
+            font-size: 0.9rem;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 class="multicolored-heading">Quizzo!</h1>
+    <div class="container" ng-app="">
+        <div class="card">
+            <div class="card-header">
+                <h4  style="margin-bottom: 0px;">Welcome Back!</h4>
+            </div>
+            <div class="card-body">
+                <form class="user" action="login.php" method="POST" name="login">
+                    <div class="mb-3">
+                        <input class="form-control form-control-user" type="text" id="user" placeholder="Enter Username..." name="user" ng-model="username">
+                        <p class="text-danger" ng-show="login.user.$touched && login.user.$pristine">Username Not Entered!</p>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-control form-control-user" type="password" id="password" placeholder="Password" name="password" ng-model="password">
+                        <p class="text-danger" ng-show="login.password.$touched && login.password.$pristine">Password Not Entered!</p>
+                    </div>
+                    <div class="mb-3">
+                        <div class="custom-control custom-checkbox small">
+                            <div class="form-check"><input class="form-check-input custom-control-input" type="checkbox" name="remember" id="formCheck-1"><label class="form-check-label custom-control-label" for="formCheck-1">Remember Me</label></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary d-block btn-user w-100" type="submit" ng-disabled="!username || !password" id="login_button" onclick="window.open('login.html','_self')">Login</button>
+                    <hr class="divider">
+                
+                    <div class="text-center">
+                        <a class="small" href="register.html">Create an Account!</a>
+                    </div>
+                  
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
