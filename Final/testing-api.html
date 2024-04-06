@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TwNQ06K/logo2.png">
+
     <title>Focus!</title>
     <style>
         .multicolored-heading {
@@ -329,8 +331,6 @@
 
                 let url = `update.php?quizCAT=${quizCAT}&username=${username}&score=${score}`;
                 fetch(url);
-                alert('Score Updated');
-                window.location.href = 'quizpage.html';
                 return true;
             } else {
                 showIncompleteModal();
@@ -365,6 +365,7 @@
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
+                    window.open('quizpage.html', '_self');
                 }
             }
         } 

@@ -23,9 +23,7 @@ $score = (int) $score;
 $sql = "UPDATE scores SET $quizID = $quizID + $score WHERE username = '$username' ";
 
 if ($connection->query($sql) === TRUE) {
-    echo "
-        
-    ";
+
 } else {
     echo "Error updating score: " . $connection->error;
 }

@@ -5,27 +5,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/TwNQ06K/logo2.png">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Navbar-Right-Links-icons.css">
-    <script src="/Final/assets/js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <style>
-footer, footer a, footer p, footer li{
-    font-size: 17px;
-    font-family: 'Helvetica', sans-serif; 
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    
-}
+    footer, footer a, footer p, footer li{
+        font-size: 17px;
+        font-family: 'Helvetica', sans-serif; 
+        text-decoration: none;
+        color: white;
+        text-align: center;
+        
+    }
 
-footer h3{
-    font-weight: bold;
-    font-size: 30px;
-    font-family: 'Helvetica', sans-serif; 
-    text-decoration: none;
-    color: white;
-    text-align: center;
-}
+    footer h3{
+        font-weight: bold;
+        font-size: 30px;
+        font-family: 'Helvetica', sans-serif; 
+        text-decoration: none;
+        color: white;
+        text-align: center;
+    }
 
         .dynamicText {
     font-weight: bold; 
@@ -82,7 +83,7 @@ button{
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('/Final/assets/img/bg-img.jpg'); /* Replace 'your-image-url.jpg' with your image URL */
+            background-image: url('https://images.inc.com/uploaded_files/image/1920x1080/getty_73970377_970670970450024_65322.jpg'); /* Replace 'your-image-url.jpg' with your image URL */
             background-size: cover;
             background-position: center;
         }
@@ -126,7 +127,7 @@ button{
 </script>
 </head>
 
-<body ng-app="">
+<body ng-app="" onload="checkLogin()">
     <!--Navbar-->
     <nav class="navbar navbar-expand-md py-3 navbar-light" style="background: var(--bs-link-color);">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="home.html" style="background: var(--bs-white);padding-top: 5px;padding-right: 8px;padding-left: 8px;border-radius: 10px;"><img src="assets/img/logo.png" width="92" height="91" style="width: 30px;height: 30px;border-radius: 134px;"><span>Quizzo!</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-2"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
@@ -140,7 +141,7 @@ button{
     </nav>
 
     <div class="container mt-5 p-0 mb-5 bg-white">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center bg-white">
             <h1 class="text-center mt-3 welcome" ng-show="isLoggedIn">WELCOME</h1> <!-- If logged in, this should display the username-->
         </div>
         <div class="row">
@@ -148,28 +149,31 @@ button{
                 <div class="background-image"></div>
                 <div class="overlay"></div>
                 <p class="dynamicText" style="width: 290px;">Show your <span class="dynamicText" id="dynamicWord">greatness</span></p>
-                <button class="btn btn-primary mt-5" type="button">Take a Quiz!</button>
+                <button class="btn btn-primary mt-5" onclick="window.open('QuizTopics.html', '_self')" type="button">Take a Quiz!</button>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-6 p-0">
                 <div class="carousel slide" data-bs-ride="false" id="carousel-1">
                     <div class="carousel-inner">
-                        <div class="carousel-item active"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
+                        <div class="carousel-item active">
+                            <div class="overlay"></div><img height="400px" class="w-100 d-block" src="https://media.istockphoto.com/id/1288610566/photo/family-meeting.jpg?s=612x612&w=0&k=20&c=93dPFuCU0gjvd5G8j97b3htnTRAlYtiFqN8IKHqIbrk=" alt="Slide Image">
                             <div class="carousel-caption" style="color: rgb(0,0,0);">
-                                <h3 style="color: #000000;">Slide Title</h3>
-                                <p>Slide Caption</p>
+                                <h3 style="color: #ffffff;">Enjoy with Your Family!</h3>
+                                <p style="color: #ffffff;">Spending quality time with family is priceless. Take a break and have fun together!</p>
                             </div>
                         </div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
+                        <div class="carousel-item">
+                            <div class="overlay"></div><img height="400px" class="w-100 d-block" src="https://c8.alamy.com/comp/JB6F8N/group-friends-college-students-showing-new-smart-phone-in-park-JB6F8N.jpg" alt="Slide Image">
                             <div class="carousel-caption" style="color: rgb(0,0,0);">
-                                <h3>Slide Title</h3>
-                                <p>Slide Caption</p>
+                                <h3 style="color: #ffffff;">Compete Against Friends</h3>
+                                <p style="color: #ffffff;">Challenge your friends to quizzes and see who comes out on top!</p>
                             </div>
                         </div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image">
+                        <div class="carousel-item">
+                            <div class="overlay"></div><img height="400px" class="w-100 d-block" src="https://as2.ftcdn.net/v2/jpg/02/64/75/01/1000_F_264750103_j3pG3e64zgaDj8iaDhbVvSEXyxEUctpB.jpg" alt="Slide Image">
                             <div class="carousel-caption" style="color: rgb(0,0,0);">
-                                <h3 style="color: #000000;">Slide Title</h3>
-                                <p>Slide Caption</p>
+                                <h3 style="color: #ffffff;">Discover New Topics</h3>
+                                <p style="color: #ffffff;">Expand your knowledge and explore exciting topics with Quizzo!</p>
                             </div>
                         </div>
                     </div>
@@ -195,19 +199,19 @@ button{
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
                     <h3 class="fs-6 text-white">Joshua Ferreira</h3>
-                    <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">Link</a>
+                    <p>C107<br>70322000042</p><a href="https://www.linkedin.com/in/joshua-ferreira-b673a8224/">linkedin</a>
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
                     <h3 class="fs-6 text-white">Aadee Sawarkar</h3>
-                    <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">Link</a>
+                    <p>C117<br>70322000040</p><a href="https://www.linkedin.com/in/aadee-sawarkar-b72966238/">linkedin</a>
                 </div>
                 <div class="col-sm-4 col-md-3 text-center text-lg-start d-flex flex-column col-xl-2">
                     <h3 class="fs-6 text-white">Dhruvi Mehta</h3>
-                    <p>C128<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">Link</a>
+                    <p>C128<br>70322000149</p><a href="https://www.linkedin.com/in/dhruvi-mehta-487379231/">linkedin</a>
                 </div>
                 <div class="col-lg-3 col-xl-2 text-center text-lg-start d-flex flex-column align-items-center order-first align-items-lg-start order-lg-last">
-                    <div class=" d-flex align-items-center mb-2"><span class="text-center" style="font-weight: normal !important;">Quizzo!</span></div>
-                    <p>Unlock Your Wit, Quizzo - Where Knowledge Meets Fun!</p>
+                    <div class=" d-flex align-items-center mb-2"><span class="text-center" style="margin-left: 90%; font-weight: normal !important;">Quizzo!</span></div>
+                    <p>Unlock Your Wit! <br>Where Knowledge Meets Fun!</p>
                 </div>
             </div>
         </div>
